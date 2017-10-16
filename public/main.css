@@ -1,0 +1,44 @@
+body {
+  background-color: #000034;
+  margin: 0;
+  padding-top: 2.5%;
+}
+
+.logo-container {
+  text-align: center;
+}
+
+.logo-container .cls-1 {
+  fill: #fff
+}
+
+.search-box {
+  padding: 30px 20px;
+  color: #fff;
+}
+
+.search-box > div {
+  width: 100%
+}
+
+.search-box .mdl-textfield__input {
+  border-bottom-color: rgba(255, 255, 255, .75);
+}
+
+.search-box .mdl-textfield__label {
+  color: rgba(255, 255, 255, .75);
+}
+
+.search-box .mdl-textfield__label:after {
+  background-color: #CC0003;
+}
+
+.mdl-card__title img {
+  margin: 0 auto;
+}
+
+.powered-by {
+  text-align: center;
+  color: #fff;
+  font-style: italic;
+}
