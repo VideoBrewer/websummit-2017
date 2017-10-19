@@ -14,7 +14,9 @@ Promise
     result = result
       .map((el) => el.results[0].hits)
       .reduce((acc, curr) => {
-        acc.push(curr[0])
+        console.log(curr)
+        acc = acc.concat(curr)
+
         return acc
       }, [])
 
