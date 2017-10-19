@@ -2,10 +2,31 @@
   angular
     .module('WebSummit', [])
     .controller('HomeController', ['$scope', '$http', '$timeout', ($scope, $http, $timeout) => {
+      const fuseOptions = {
+        shouldSort: true,
+        tokenize: true,
+        matchAllTokens: true,
+        threshold: 0.1,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 2,
+        keys: [
+          "name",
+          "elevator_pitch",
+          "industry",
+          "city",
+          "country"
+        ]
+      }
+
+      let startups
+      let fuse
+
       $scope.startups = []
       $scope.searchValue = ''
 
-      $scope.getStartups = getStartups
+      $scope.filter = filter
 
       init()
 
@@ -13,14 +34,15 @@
         $http
           .get('data/startups.json')
           .then((res) => {
-            $timeout(() => $scope.startups = res.data)
+            startups = res.data
+            fuse = new Fuse(startups, fuseOptions)
+
+            $timeout(() => $scope.startups = startups)
           })
       }
 
-      function getStartups () {
-        return $scope.startups.filter((startup) => {
-          return JSON.stringify(startup).toLowerCase().match($scope.searchValue.toLowerCase())
-        })
+      function filter () {
+        $scope.startups = !$scope.searchValue ? startups : fuse.search($scope.searchValue)
       }
     }])
 })()

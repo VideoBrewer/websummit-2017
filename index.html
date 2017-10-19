@@ -37,11 +37,13 @@
       <polygon id="SVGID-3" data-name="SVGID" class="cls-4 arrow_1"
                points="199.35 82.44 241.72 9.16 284.07 82.44 199.35 82.44"></polygon>
     </svg>
+
+    <p class="powered-by"><small>Powered by <a href="https://www.videobrewer.com" target="_blank">Video Brewer</a></small></p>
   </div>
 
   <div class="search-box">
     <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="text" id="searchInput" ng-model="searchValue">
+      <input class="mdl-textfield__input" type="text" id="searchInput" ng-model="searchValue" ng-model-options="{ debounce: 200 }" ng-change="filter()">
       <label class="mdl-textfield__label" for="searchInput">
         Search for ...
       </label>
@@ -49,7 +51,7 @@
   </div>
 
   <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col mdl-card" ng-repeat="startup in getStartups()">
+    <div ng-cloak class="mdl-cell mdl-cell--4-col mdl-card" ng-repeat="startup in startups track by startup.id" ng-if="startups.length">
       <div class="mdl-card__title">
         <img ng-src="{{startup.logo_urls.thumb}}" alt="{{startup.name}}">
       </div>
@@ -64,9 +66,8 @@
     </div>
   </div>
 
-  <p class="powered-by"><small>Powered by <a href="https://www.videobrewer.com" target="_blank">Video Brewer</a></small></p>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
   <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <script src="public/app.js"></script>
 </body>
