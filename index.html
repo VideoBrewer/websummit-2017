@@ -53,13 +53,16 @@
   <div class="mdl-grid">
     <div ng-cloak class="mdl-cell mdl-cell--4-col mdl-card" ng-repeat="startup in startups track by startup.id" ng-if="startups.length">
       <div class="mdl-card__title">
-        <img ng-src="{{startup.logo_urls.thumb}}" alt="{{startup.name}}">
+        <img ng-src="{{startup.logo}}" alt="{{startup.name}}">
       </div>
 
       <div class="mdl-card__supporting-text">
-        <p ng-bind="startup.elevator_pitch"></p>
+        <p ng-bind="startup.elevatorPitch"></p>
 
-        <p><a ng-href="http://{{startup.external_urls.homepage}}" target="_blank">{{startup.external_urls.homepage}}</a></p>
+        <p><a
+          ng-href="http://{{startup.homepage}}"
+          ng-click="trackOutboundLink(startup.homepage)"
+          target="_blank">{{startup.homepage}}</a></p>
 
         <p><strong ng-bind="startup.industry"></strong></p>
       </div>

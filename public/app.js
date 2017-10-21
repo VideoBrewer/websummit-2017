@@ -1,4 +1,6 @@
 (function () {
+  'use strict'
+
   angular
     .module('WebSummit', [])
     .controller('HomeController', ['$scope', '$http', '$timeout', ($scope, $http, $timeout) => {
@@ -12,11 +14,11 @@
         maxPatternLength: 32,
         minMatchCharLength: 2,
         keys: [
-          "name",
-          "elevator_pitch",
-          "industry",
-          "city",
-          "country"
+          'city',
+          'country',
+          'elevatorPitch',
+          'industry',
+          'name'
         ]
       }
 
@@ -27,22 +29,31 @@
       $scope.searchValue = ''
 
       $scope.filter = filter
+      $scope.trackOutboundLink = trackOutboundLink
 
       init()
 
       function init () {
         $http
-          .get('data/startups.json')
+          .get('data/startups.json.gz')
           .then((res) => {
             startups = res.data
             fuse = new Fuse(startups, fuseOptions)
 
-            $timeout(() => $scope.startups = startups)
+            $timeout(() => { $scope.startups = startups })
           })
       }
 
       function filter () {
         $scope.startups = !$scope.searchValue ? startups : fuse.search($scope.searchValue)
+      }
+
+      function trackOutboundLink (url) {
+        gtag('event', 'click', {
+          'event_category': 'outbound',
+          'event_label': url,
+          'transport_type': 'beacon'
+        })
       }
     }])
 })()
