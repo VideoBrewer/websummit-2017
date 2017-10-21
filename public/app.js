@@ -35,7 +35,7 @@
 
       function init () {
         $http
-          .get('data/startups.json.gz')
+          .get('data/startups.json')
           .then((res) => {
             startups = res.data
             fuse = new Fuse(startups, fuseOptions)
