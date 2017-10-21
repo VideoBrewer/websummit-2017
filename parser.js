@@ -23,7 +23,7 @@ Promise
           city: startup.city,
           country: startup.country,
           elevatorPitch: startup.elevator_pitch,
-          homepage: startup.external_urls.homepage,
+          homepage: startup.external_urls.homepage.replace(/^http[s]?:\/\//, ''),
           industry: startup.industry,
           logo: startup.logo_urls.thumb,
           name: startup.name,
